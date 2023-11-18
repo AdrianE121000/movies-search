@@ -28,5 +28,5 @@ export function useMovies({ search, sort }) {
       : movies;
   }, [sort, movies]);
 
-  return { movies: sortedMovies, getMovies, loading };
+  return { movies: sortedMovies, getMovies, loading, previousSearch };
 }

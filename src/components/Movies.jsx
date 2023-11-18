@@ -1,3 +1,5 @@
+import { useMovies } from '../hooks/useMovies';
+
 export function ListOfMovies({ movies }) {
   return (
     <ul className='movies'>
@@ -17,11 +19,20 @@ export function ListOfMovies({ movies }) {
   );
 }
 
-export function NoMoviesResults() {
-  return <p>No se encontraron peliculas para esta busqueda</p>;
+export function NoMoviesResults({ movies }) {
+  const { previousSearch } = useMovies({ movies });
+  return previousSearch.current === movies ? (
+    <p>No se encontraron peliculas para esta busqueda</p>
+  ) : (
+    <></>
+  );
 }
 
 export function Movies({ movies }) {
   const hasMovies = movies?.length > 0;
-  return hasMovies ? <ListOfMovies movies={movies} /> : <NoMoviesResults />;
+  return hasMovies ? (
+    <ListOfMovies movies={movies} />
+  ) : (
+    <NoMoviesResults movies={movies} />
+  );
 }
